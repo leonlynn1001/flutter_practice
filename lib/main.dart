@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(appBarTheme: AppBarTheme(backgroundColor: Colors.pinkAccent,)),
       home: FlashPage(),
       
     );

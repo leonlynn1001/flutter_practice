@@ -1,5 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pj_1/pages/welcome_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FlashPage extends StatefulWidget {
   const FlashPage({super.key});
@@ -15,7 +17,7 @@ class _FlashPageState extends State<FlashPage> {
   bool isDownLoad = false;
 
   _checkVersion() async {
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
     setState(() {
       isDownLoad = true;
     });
@@ -37,15 +39,31 @@ class _FlashPageState extends State<FlashPage> {
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _makeLogo(),
+            ZoomIn(
+              duration: Duration(seconds: 5),
+              child:  _makeLogo(),
+            ),
+           
             SizedBox(height: vSpace,),
-            _makeTitle(),
+            FadeInUp(
+              duration: Duration(seconds: 1),
+              delay: Duration(seconds: 5),
+              child: _makeTitle()
+              ),
             SizedBox(height: vSpace,),
-            _makeProgress(),
+            FadeIn( 
+              delay: Duration(seconds: 6),
+              duration: Duration(seconds: 1),
+              child: _makeProgress()
+              ).heartBeat(),
             SizedBox(height: vSpace,),
-            _makeLoadingText(),
+            FadeInLeft(
+              delay: Duration(seconds: 11),
+              duration: Duration(seconds: 1),
+              child:  _makeLoadingText()
+              ),
             SizedBox(height: vSpace,),
-            isDownLoad ? _makeDownLoadBtn() : SizedBox(),
+            isDownLoad ? BounceIn(delay:Duration(seconds: 12),child: _makeDownLoadBtn()) : SizedBox(),
 
           ],
         )
@@ -67,17 +85,19 @@ class _FlashPageState extends State<FlashPage> {
       backgroundColor: Colors.transparent,
       backgroundImage: AssetImage("assets/images/logo.png"),
     ),
-    );
+    ).heartBeat(delay: Duration(seconds: 5), duration: Duration(seconds: 2));
   }
 
   _makeTitle(){
     return Text(
       "Coder Media",
-      style: TextStyle(
+      style: GoogleFonts.exo2(
+        textStyle: TextStyle(
         color: Colors.pinkAccent,
         fontSize: 40.0,
         fontWeight: FontWeight.bold
       ),
+      )
     );
   }
 
@@ -85,17 +105,22 @@ class _FlashPageState extends State<FlashPage> {
     return CircularProgressIndicator(
       color: Colors.redAccent,
       backgroundColor: Colors.amber,
+    ).bounce(
+      delay: Duration(seconds: 9),
+      duration: Duration(seconds: 2)
     );
   }
 
   _makeLoadingText(){
     return Text("Please wait",
-      style: TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.bold,
-        color: Colors.grey,
-      ),
-      );
+      style: GoogleFonts.notoSans(
+        textStyle: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.grey,
+        )
+      )
+    );
   }
 
   _makeDownLoadBtn(){

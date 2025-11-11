@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pj_1/pages/home_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -33,39 +34,48 @@ class _WelcomePageState extends State<WelcomePage> {
 
             children: [
               //page1
-              DecoratedBox(
+              _makeDecoratedBox("p1.png"),
+              _makeDecoratedBox("p2.png"),
+              //_makeDecoratedBox("p3.png"),
+              Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/logo.png"),
-                    fit: BoxFit.cover,
-                  )
-                )
+                    image: AssetImage("assets/images/p3.png"),
+                     fit:BoxFit.contain,
+                     ),
                 ),
-                //page2
-                 // Page 2
-              Container(
-                color: Colors.green,
-                child: const Center(
-                  child: Text(
-                    "Welcome Page 2",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
+                child: Column(
+                  children: [
+                    Expanded(child: SizedBox()),
+                    Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          gradient: LinearGradient(
+                            colors: [Colors.pinkAccent, Colors.amberAccent])
+                        ),
+                        child: ElevatedButton(
+                          onPressed: (){
+                            Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (context)=> HomePage()
+                              )
+                              );
+                          }, 
+                          style : ElevatedButton.styleFrom(
+                            backgroundColor : Colors.transparent,
+                          ),
+                          child: Text(
+                            "Start",
+                            style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                          ),
+                    ),
+                    SizedBox(height: 200,)
+                  ],
+                  
                 ),
-              ),
-              //page3
-               // Page 2
-              Container(
-                color: Colors.pink,
-                child: const Center(
-                  child: Text(
-                    "Welcome Page 3",
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                ),
-              ),
-
-
-              
+              )
+               
             ],
            ),
            //page indicator
@@ -87,7 +97,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                     ),
                     SizedBox(width: 5,),
-                        Container(
+                      Container(
                         width: 15,
                         height: 15,
                         decoration: BoxDecoration(
@@ -97,7 +107,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ),
                     SizedBox(width: 5,),
-                        Container(
+                      Container(
                         width: 15,
                         height: 15,
                         decoration: BoxDecoration(
@@ -106,8 +116,6 @@ class _WelcomePageState extends State<WelcomePage> {
                           border: Border.all(color: Colors.blueAccent,width:2)
                         ),
                       ),
-                    
-
                   ],
                 ),
               )
@@ -120,5 +128,16 @@ class _WelcomePageState extends State<WelcomePage> {
       )
       );
     
+  }
+
+  _makeDecoratedBox(String image){
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/$image"),
+          fit: BoxFit.contain,
+          )
+      ),
+    );
   }
 }
